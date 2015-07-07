@@ -1,0 +1,11 @@
+{
+  "name": "myBusuuTest",
+  "version": "0.0.1",
+  "private": true,
+  "description": "myBusuuTest AJS skills with no express",
+  "author": "Iasen Drenski <iasen.drenski@ingbank.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "http-server -a 127.0.0.1 -p 1337 -c-1"
+  }
+}
