@@ -16,11 +16,11 @@
             $routeProvider
                 .when('/home', {
                     templateUrl: 'views/partials/home.html',
-                    controller: 'HomeControl'
+                    controller: 'HomeController'
                 })
                 .when('/view2', {
                     templateUrl: 'views/partials/partial2.html',
-                    controller: 'MyCtrl2'
+                    controller: 'GameController'
                 })
                 .otherwise({
                     redirectTo: '/home'

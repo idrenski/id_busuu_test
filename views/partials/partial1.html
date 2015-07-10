@@ -1,4 +1,17 @@
-<div>
-      <div class="badge">Please answer of the question: </div>
-    <div class="text-primary">{{idWords[idRandom].def}} <{{idWords[idRandom].en}}></div>
+<div class="starter-template">
+    <h2 class="media">Please translate to Spanish of the following words below:</h2>
+
+    <div ng-repeat="sentence in idObj.sentences" class="left">
+        <div class="lead">'{{sentence.en}}'
+            <div class="text-info; text-muted;">{{sentence.def}}</div>
+
+            <div class="input-lg"><input id="{{$index}}" ng-blur="doSomething('Im here')"
+                                         ng-model="idAnswer" +{{$index}}
+                                         min="2"
+                                         placeholder="Enter your answer here">
+            </div>
+
+            <!--<div ng-bind="sentence.es"></div>-->
+        </div>
+    </div>
 </div>

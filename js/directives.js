@@ -13,16 +13,16 @@
             };
         })
 
-    .directive('questionTemplate', function () {
-        return {
-            restrict: 'E',
-            scope: {
-                idWords: '=',
-                idRandom: '='
-            },
-            templateUrl: 'views/partials/partial1.html',
-            transclude: true
-        };
-    });
+        .directive('questionTemplate', function () {
+            return {
+                restrict: 'E',
+                scope: {
+                    idObj: '=',
+                    checkAnswer: '&'
+                },
+                templateUrl: 'views/partials/partial1.html',
+                transclude: true
+            };
+        })
 
 })(angular);

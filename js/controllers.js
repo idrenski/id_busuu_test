@@ -7,7 +7,7 @@
 
     angular.module('myApp.controllers', ["myApp.services"])
 
-        .controller('AppCtrl', ['$scope',
+        .controller('AppController', ['$scope',
 
             function ($scope, $http) {
                 $scope.name = 'Iasen';
@@ -24,27 +24,50 @@
                  $scope.name = 'Error!'
                  });*/
 
-                console.log('AppCtrl', $scope);
+                console.log('AppController', $scope);
 
             }])
 
-        .controller('HomeControl', ['$scope', 'apiRandomFactory', 'apiUserDataService', 'words',
+        .controller('HomeController', ['$scope', 'apiRandomFactory', 'apiUserDataService', 'words',
 
             function ($scope, apiRandomFactory, apiUserDataService, words) {
                 // write Ctrl here
-                $scope.idRandom = apiRandomFactory.getRandom(0, 10);
                 $scope.name = apiUserDataService.getUsername();
-                $scope.idWords = words;
 
-                console.log('The word ' + $scope.idRandom + ' is: ', $scope.idWords[$scope.idRandom].en, " <", $scope.idWords[$scope.idRandom].def, "> /", $scope.idWords[$scope.idRandom].es);
+                $scope.checkAnswer = function (idQuestion, Answer) {
+                    if (lowercase($scope.idObj.sentences[idQuestion].es) == lowercase(Answer)) {
+                        return true
+                    }
+                    else {
+                        return false
+                    }
+                };
 
-                console.log('HomeControl', $scope);
+                $scope.idObj = {};
+                $scope.idObj.randoms = [];
+                $scope.idObj.sentences = [];
+
+                var i = 0;
+                do {
+                    var irandom = apiRandomFactory.getRandom(0, 10);
+                    if ($scope.idObj.randoms.indexOf(irandom) > -1) {
+                        continue;
+                    }
+                    else {
+                        $scope.idObj.randoms[i] = irandom;
+                        $scope.idObj.sentences[i] = words[irandom];
+                        i++;
+                    }
+                }
+                while (i < 3);
+
+                console.log('HomeController', $scope);
             }])
 
-        .controller('MyCtrl2', function ($scope) {
+        .controller('GameController', function ($scope) {
             // write Ctrl here
 
-            console.log('MyCtrl2', $scope);
+            console.log('GameController', $scope);
 
         });
 
