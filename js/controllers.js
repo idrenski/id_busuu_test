@@ -24,18 +24,20 @@
                  $scope.name = 'Error!'
                  });*/
 
-                console.log('AppController', $scope);
+               // console.log('AppController', $scope);
 
             }])
+        .controller('HomeController', ['$scope', 'apiRandomFactory', 'apiUserDataService', 'apiAnswerFactory', 'words',
 
-        .controller('HomeController', ['$scope', 'apiRandomFactory', 'apiUserDataService', 'words',
-
-            function ($scope, apiRandomFactory, apiUserDataService, words) {
+            function ($scope, apiRandomFactory, apiUserDataService, apiAnswerFactory, words) {
                 // write Ctrl here
                 $scope.name = apiUserDataService.getUsername();
 
                 $scope.checkAnswer = function (idQuestion, Answer) {
-                    if (lowercase($scope.idObj.sentences[idQuestion].es) == lowercase(Answer)) {
+                    var correctAnswer = apiAnswerFactory.getAnswer(idQuestion, words);
+
+                    if (correctAnswer.toLowerCase() == Answer.toLowerCase()) {
+
                         return true
                     }
                     else {
@@ -45,29 +47,28 @@
 
                 $scope.idObj = {};
                 $scope.idObj.randoms = [];
-                $scope.idObj.sentences = [];
+                $scope.idObj.sentences = {};
+
 
                 var i = 0;
                 do {
                     var irandom = apiRandomFactory.getRandom(0, 10);
-                    if ($scope.idObj.randoms.indexOf(irandom) > -1) {
-                        continue;
-                    }
-                    else {
+                    if ($scope.idObj.randoms.indexOf(irandom) < 0) {
+
                         $scope.idObj.randoms[i] = irandom;
-                        $scope.idObj.sentences[i] = words[irandom];
+                        $scope.idObj.sentences[i] = {'def': words[irandom].def, 'en': words[irandom].en};
                         i++;
                     }
                 }
                 while (i < 3);
 
-                console.log('HomeController', $scope);
+              //  console.log('HomeController', $scope);
             }])
 
         .controller('GameController', function ($scope) {
             // write Ctrl here
 
-            console.log('GameController', $scope);
+           // console.log('GameController', $scope);
 
         });
 

@@ -1,17 +1,18 @@
 <div class="starter-template">
-    <h2 class="media">Please translate to Spanish of the following words below:</h2>
-
+    <h2 class="media">Please, put the correct Spanish words for the following definitions:</h2>
     <div ng-repeat="sentence in idObj.sentences" class="left">
-        <div class="lead">'{{sentence.en}}'
-            <div class="text-info; text-muted;">{{sentence.def}}</div>
+        <div class="lead">'{{sentence.def}}'
 
-            <div class="input-lg"><input id="{{$index}}" ng-blur="doSomething('Im here')"
-                                         ng-model="idAnswer" +{{$index}}
-                                         min="2"
-                                         placeholder="Enter your answer here">
+
+            <div class="input-lg">
+
+                <input id="{{$index}}" ng-focus="ans = sentence.en; idAnswer = '';" ng-blur="ans = checkAnswer({idQuestion:idObj.randoms[$index],Answer:idAnswer})?'correct answer':'wrong answer'"
+                       ng-model="idAnswer"
+                       min="2"
+                       placeholder="Enter your answer here">
+
+                <div class="text-info; text-muted; text-danger">{{ans}}</div>
             </div>
-
-            <!--<div ng-bind="sentence.es"></div>-->
         </div>
     </div>
 </div>

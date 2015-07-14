@@ -15,13 +15,13 @@
 
         .directive('questionTemplate', function () {
             return {
-                restrict: 'E',
+                restrict: 'EA',
+                replace: true,
                 scope: {
                     idObj: '=',
                     checkAnswer: '&'
                 },
-                templateUrl: 'views/partials/partial1.html',
-                transclude: true
+                templateUrl: 'views/partials/partial1.html'
             };
         })
 

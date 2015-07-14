@@ -17,6 +17,16 @@
             return sResult;
         }])
 
+        .factory('apiAnswerFactory', ['words', function (words) {
+            var sResult = {};
+
+            sResult.getAnswer = function (pos) {
+                return words[pos].es;
+            };
+
+            return sResult;
+        }])
+
         .service('apiUserDataService', function () {
             this.name = "Bob";
 
