@@ -28,7 +28,7 @@
         }])
 
         .service('apiUserDataService', function () {
-            this.name = "Bob";
+            this.name = "";
 
             this.getUsername = function () {
                 return this.name;

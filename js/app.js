@@ -18,8 +18,8 @@
                     templateUrl: 'views/partials/home.html',
                     controller: 'HomeController'
                 })
-                .when('/view2', {
-                    templateUrl: 'views/partials/partial2.html',
+                .when('/game', {
+                    templateUrl: 'views/partials/game.html',
                     controller: 'GameController'
                 })
                 .otherwise({

@@ -1,8 +1,27 @@
 <div class="starter-template">
-  <h1>Hello {{name}}</h1>
-  <p class="lead">Use this document as a way to quickly start any new project.
-    <br>All you get is this text and a mostly barebones HTML document.</p>
-  <div>
-    <question-template id-obj="idObj" check-answer="checkAnswer(idQuestion, Answer)"></question-template>
-  </div>
+    <h1>Hello {{name}}</h1>
+
+    <h3>This is a Busuu front end test app.
+        <br>We would like you to implement a very simple vocabulary game.</h3>
+
+    <em class="lead">The technology is AngularJS, Bootstrap and LessCSS on front end, with NodeJS communication endpoint
+        on
+        backend.</em>
+
+    <p class="text-left">
+        You will find 11 words with keyphrases and spanish translation hardcoded in words AngularJS value in
+        public/js/services.js.
+
+        On every round one random word is chosen - question asked to the player. We show player english word with
+        english keyphrase.
+        We also provide 3 answers - shown to user in Spanish - chosen randomly from 11 words provided (one of them is
+        translation of previously randomly chosen word).
+        The game consists of 3 rounds. If the user chooses the wrong answer the game is finished.
+        When the game is finished the user can enter his name. If he does, the score is sent to the server, and will
+        appear on "High score" subpage of the app. This subpage will download highscore list, using $http AngularJS
+        service.
+        <br><br>
+        <em>Tip: No need to use any database persistence on server-side - keeping data in NodeJS memory is sufficient
+            for this test.</em>
+    </p>
 </div>

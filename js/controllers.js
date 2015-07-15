@@ -24,10 +24,17 @@
                  $scope.name = 'Error!'
                  });*/
 
-               // console.log('AppController', $scope);
+                // console.log('AppController', $scope);
 
             }])
-        .controller('HomeController', ['$scope', 'apiRandomFactory', 'apiUserDataService', 'apiAnswerFactory', 'words',
+
+        .controller('HomeController', function () {
+            // write Ctrl here
+
+            console.log('HomeController');
+        })
+
+        .controller('GameController', ['$scope', 'apiRandomFactory', 'apiUserDataService', 'apiAnswerFactory', 'words',
 
             function ($scope, apiRandomFactory, apiUserDataService, apiAnswerFactory, words) {
                 // write Ctrl here
@@ -62,14 +69,7 @@
                 }
                 while (i < 3);
 
-              //  console.log('HomeController', $scope);
-            }])
-
-        .controller('GameController', function ($scope) {
-            // write Ctrl here
-
-           // console.log('GameController', $scope);
-
-        });
+                console.log('GameController', $scope);
+            }]);
 
 })(angular);
