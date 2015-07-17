@@ -1,18 +1,52 @@
 <div class="starter-template">
-    <h2 class="media">Please, put the correct Spanish words for the following definitions:</h2>
-    <div ng-repeat="sentence in idObj.sentences" class="left">
-        <div class="lead">'{{sentence.def}}'
+    <div class="text-center">
+        <h3>Please, choose the correct Spanish word for the following definition:</h3>
+    </div>
+    <!--<script>
+        getRadioValue = function () {
+            document.userChoice.rValue.value = document.userChoice.idAnswer.value;
+
+        };
+    </script>-->
+    <form name="userChoice">
+        <div class="left table-bordered">
+            <div class="lead">
 
 
-            <div class="input-lg">
+                <div class="row">
+                    <div class="col-xs-12">
+                        Question: {{idObj.Question.def}} ({{idObj.Question.en}})
+                    </div>
+                </div>
 
-                <input id="{{$index}}" ng-focus="ans = sentence.en; idAnswer = '';" ng-blur="ans = checkAnswer({idQuestion:idObj.randoms[$index],Answer:idAnswer})?'correct answer':'wrong answer'"
-                       ng-model="idAnswer"
-                       min="2"
-                       placeholder="Enter your answer here">
+                <div class="row" ng-repeat="answers in idObj.Answers">
+                    <div class="col-xs-6 text-right">
+                        {{answers.es}}
+                    </div>
+                    <div class="col-xs-6 text-left">
+                        <label>
+                            <input type="radio" ng-model="idObj.idAnswer"
+                                   ng-value="idObj.randoms[$index]">
+                        </label>
+                    </div>
+                </div>
 
-                <div class="text-info; text-muted; text-danger">{{ans}}</div>
+
+
             </div>
         </div>
-    </div>
+        <br>
+
+        <button class="btn btn-default" type="submit"
+                ng-click="ans = checkAnswer({Question:idObj.Question.def, idAnswer:idObj.idAnswer})">
+            Submit
+        </button>
+
+        radio value = {{idObj.idAnswer}}
+
+        <!--<button class="btn btn-default" type="submit" ng-click="ans = checkAnswer({idQuestion:idObj.randoms[$index],Answer:idAnswer})?'correct answer':'wrong answer'">Submit</button>-->
+    </form>
+
+    <div class="text-info; text-muted; text-danger">{{ans}}</div>
+
 </div>

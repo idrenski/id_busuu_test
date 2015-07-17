@@ -15,7 +15,7 @@
 
         .directive('questionTemplate', function () {
             return {
-                restrict: 'EA',
+                restrict: 'E',
                 replace: true,
                 scope: {
                     idObj: '=',

@@ -24,6 +24,16 @@
                 return words[pos].es;
             };
 
+            sResult.getIdQuestion = function (defQuestion) {
+
+                for (var i = 0; i < 11; i++) {
+                    if (words[i].def == defQuestion) {
+                        return i;
+                    }
+                }
+                return -1;
+            };
+
             return sResult;
         }])
 

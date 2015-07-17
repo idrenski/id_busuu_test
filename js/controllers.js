@@ -38,24 +38,19 @@
 
             function ($scope, apiRandomFactory, apiUserDataService, apiAnswerFactory, words) {
                 // write Ctrl here
-                $scope.name = apiUserDataService.getUsername();
+                // $scope.name = apiUserDataService.getUsername();
 
-                $scope.checkAnswer = function (idQuestion, Answer) {
-                    var correctAnswer = apiAnswerFactory.getAnswer(idQuestion, words);
+                $scope.checkAnswer = function (Question, idAnswer) {
+                    var idQuestion = apiAnswerFactory.getIdQuestion(Question);
 
-                    if (correctAnswer.toLowerCase() == Answer.toLowerCase()) {
-
-                        return true
-                    }
-                    else {
-                        return false
-                    }
+                    return (idAnswer == idQuestion)?true:false;
                 };
 
                 $scope.idObj = {};
-                $scope.idObj.randoms = [];
-                $scope.idObj.sentences = {};
-
+                $scope.idObj.idAnswer = -1;
+                $scope.idObj.randoms =[];
+                //$scope.idObj.Question = {};
+                $scope.idObj.Answers = {};
 
                 var i = 0;
                 do {
@@ -63,7 +58,11 @@
                     if ($scope.idObj.randoms.indexOf(irandom) < 0) {
 
                         $scope.idObj.randoms[i] = irandom;
-                        $scope.idObj.sentences[i] = {'def': words[irandom].def, 'en': words[irandom].en};
+                        if ($scope.idObj.Question == undefined) {
+                            $scope.idObj.Question = {'def': words[irandom].def, 'en': words[irandom].en};
+                        }
+                        $scope.idObj.Answers[i] = {'es': words[irandom].es};
+
                         i++;
                     }
                 }
