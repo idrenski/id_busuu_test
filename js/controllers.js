@@ -72,14 +72,15 @@
                 $scope.checkAnswer = function (Question, idAnswer) {
                     var idQuestion = apiAnswerFactory.getIdQuestion(Question);
 
-                    if ($scope.idObj.Round == 3) {
-                        $location.path('/highscore');
-                        return;
-                    }
-
                     if (idAnswer == idQuestion) {
                         apiUserDataService.setScore(1);
                         $scope.idObj.Round++;
+
+                        if ($scope.idObj.Round > 3) {
+                            $location.path('/highscore');
+                            return true;
+                        }
+
                         $scope.init();
                         $location.path('/game');
                         return true;
