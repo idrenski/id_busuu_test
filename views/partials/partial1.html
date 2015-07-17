@@ -2,12 +2,11 @@
     <div class="text-center">
         <h3>Please, choose the correct Spanish word for the following definition:</h3>
     </div>
-    <!--<script>
-        getRadioValue = function () {
-            document.userChoice.rValue.value = document.userChoice.idAnswer.value;
 
-        };
-    </script>-->
+    <div class="text-left">
+        <h3>Round {{idObj.Round}}</h3>
+    </div>
+
     <form name="userChoice">
         <div class="left table-bordered">
             <div class="lead">
@@ -32,21 +31,13 @@
                 </div>
 
 
-
             </div>
         </div>
         <br>
-
         <button class="btn btn-default" type="submit"
                 ng-click="ans = checkAnswer({Question:idObj.Question.def, idAnswer:idObj.idAnswer})">
             Submit
         </button>
-
-        radio value = {{idObj.idAnswer}}
-
-        <!--<button class="btn btn-default" type="submit" ng-click="ans = checkAnswer({idQuestion:idObj.randoms[$index],Answer:idAnswer})?'correct answer':'wrong answer'">Submit</button>-->
     </form>
-
-    <div class="text-info; text-muted; text-danger">{{ans}}</div>
 
 </div>

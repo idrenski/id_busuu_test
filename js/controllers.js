@@ -10,7 +10,6 @@
         .controller('AppController', ['$scope',
 
             function ($scope, $http) {
-                $scope.name = 'Iasen';
 
                 /*            $http({
                  method: 'GET',
@@ -24,49 +23,78 @@
                  $scope.name = 'Error!'
                  });*/
 
-                // console.log('AppController', $scope);
+                console.log('AppController', $scope);
 
             }])
 
-        .controller('HomeController', function () {
+        .controller('HomeController', ['$scope', 'apiUserDataService',
+
+            function ($scope, apiUserDataService) {
             // write Ctrl here
 
+            $scope.name = apiUserDataService.getUsername();
+
             console.log('HomeController');
-        })
+        }])
 
-        .controller('GameController', ['$scope', 'apiRandomFactory', 'apiUserDataService', 'apiAnswerFactory', 'words',
+        .controller('GameController', ['$scope', '$location', 'apiRandomFactory', 'apiUserDataService', 'apiAnswerFactory', 'words',
 
-            function ($scope, apiRandomFactory, apiUserDataService, apiAnswerFactory, words) {
+            function ($scope, $location, apiRandomFactory, apiUserDataService, apiAnswerFactory, words) {
                 // write Ctrl here
-                // $scope.name = apiUserDataService.getUsername();
+                $scope.name = apiUserDataService.getUsername();
+                $scope.score = apiUserDataService.getScore();
+
+
+                $scope.init = function () {
+
+                    $scope.idObj.idAnswer = -1;
+                    $scope.idObj.randoms = [];
+                    $scope.idObj.Question = null;
+                    $scope.idObj.Answers = {};
+
+                    var i = 0;
+                    do {
+                        var irandom = apiRandomFactory.getRandom(0, 10);
+                        if ($scope.idObj.randoms.indexOf(irandom) < 0) {
+
+                            $scope.idObj.randoms[i] = irandom;
+                            if ($scope.idObj.Question == undefined) {
+                                $scope.idObj.Question = {'def': words[irandom].def, 'en': words[irandom].en};
+                            }
+                            $scope.idObj.Answers[i] = {'es': words[irandom].es};
+
+                            i++;
+                        }
+                    }
+                    while (i < 3);
+                };
 
                 $scope.checkAnswer = function (Question, idAnswer) {
                     var idQuestion = apiAnswerFactory.getIdQuestion(Question);
 
-                    return (idAnswer == idQuestion)?true:false;
+                    if ($scope.idObj.Round == 3) {
+                        $location.path('/highscore');
+                        return;
+                    }
+
+                    if (idAnswer == idQuestion) {
+                        apiUserDataService.setScore(1);
+                        $scope.idObj.Round++;
+                        $scope.init();
+                        $location.path('/game');
+                        return true;
+
+                    }
+                    else {
+                        $location.path('/highscore');
+                        return false;
+                    }
+
                 };
 
                 $scope.idObj = {};
-                $scope.idObj.idAnswer = -1;
-                $scope.idObj.randoms =[];
-                //$scope.idObj.Question = {};
-                $scope.idObj.Answers = {};
-
-                var i = 0;
-                do {
-                    var irandom = apiRandomFactory.getRandom(0, 10);
-                    if ($scope.idObj.randoms.indexOf(irandom) < 0) {
-
-                        $scope.idObj.randoms[i] = irandom;
-                        if ($scope.idObj.Question == undefined) {
-                            $scope.idObj.Question = {'def': words[irandom].def, 'en': words[irandom].en};
-                        }
-                        $scope.idObj.Answers[i] = {'es': words[irandom].es};
-
-                        i++;
-                    }
-                }
-                while (i < 3);
+                $scope.idObj.Round = 1;
+                $scope.init();
 
                 console.log('GameController', $scope);
             }]);

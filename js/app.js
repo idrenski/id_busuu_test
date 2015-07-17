@@ -22,6 +22,10 @@
                     templateUrl: 'views/partials/game.html',
                     controller: 'GameController'
                 })
+                .when('/highscore', {
+                    templateUrl: 'views/partials/highscore.html',
+                    controller: 'GameController'
+                })
                 .otherwise({
                     redirectTo: '/home'
                 });
