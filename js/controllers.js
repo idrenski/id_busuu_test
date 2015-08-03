@@ -93,6 +93,10 @@
 
                 };
 
+                $scope.setPlayerName = function (pName) {
+                    apiUserDataService.setUsername(pName);
+                };
+
                 $scope.idObj = {};
                 $scope.idObj.Round = 1;
                 $scope.init();
