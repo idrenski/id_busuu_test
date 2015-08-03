@@ -12,6 +12,14 @@
                                          placeholder="Enter your name here">
     </h3>
 
+    <button class="btn btn-default" type="submit"
+            ng-click="downloadResult()">
+        Download result
+    </button>
+    <div ng-controller="AppController">
+        {{result}}
+    </div>
+
     <p class="text-left">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ullamcorper nisl non tellus fringilla, non maximus ligula molestie. Aliquam egestas, felis aliquet vestibulum aliquet, orci nunc euismod massa, in tempor lacus mauris ac nisl. Curabitur luctus molestie ante, nec luctus mauris placerat ut. Nulla sodales erat id eros congue elementum. Aliquam faucibus non neque eu mattis. Vivamus sit amet dolor eu dui pulvinar egestas interdum quis enim. Etiam mattis cursus ipsum vel dapibus. In hac habitasse platea dictumst. Morbi consectetur magna id risus consectetur, non ultricies quam bibendum. Quisque ac mi nec justo eleifend auctor et ac nibh. Etiam ultrices viverra quam, in convallis nulla. Donec vitae aliquam odio, nec tincidunt tortor. Sed accumsan molestie felis ac congue.
     </p>

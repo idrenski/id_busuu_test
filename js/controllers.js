@@ -7,35 +7,38 @@
 
     angular.module('myApp.controllers', ["myApp.services"])
 
-        .controller('AppController', ['$scope',
+        .controller('AppController',
 
-            function ($scope, $http) {
+        function ($scope, $http, apiUserDataService) {
 
-                /*            $http({
-                 method: 'GET',
-                 url: '/api/name'
-                 })
-                 .success(function (data, status, headers, config) {
-                 $scope.name = data.name;
-                 })
+            $scope.downloadResult = function () {
 
-                 .error(function (data, status, headers, config) {
-                 $scope.name = 'Error!'
-                 });*/
+                $http.get('/api.js').
+                    then(
+                    function (response) {
+                        // this callback will be called asynchronously
+                        // when the response is available
+                        $scope.result = 'Player: ' + apiUserDataService.getUsername() + " with score: " + apiUserDataService.getScore();
+                        console.log('AppController', $scope);
 
-                console.log('AppController', $scope);
-
-            }])
+                    }, function (response) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        alert("AJAX failed!");
+                    }
+                );
+            }
+        })
 
         .controller('HomeController', ['$scope', 'apiUserDataService',
 
             function ($scope, apiUserDataService) {
-            // write Ctrl here
+                // write Ctrl here
 
-            $scope.name = apiUserDataService.getUsername();
+                $scope.name = apiUserDataService.getUsername();
 
-            console.log('HomeController');
-        }])
+                console.log('HomeController');
+            }])
 
         .controller('GameController', ['$scope', '$location', 'apiRandomFactory', 'apiUserDataService', 'apiAnswerFactory', 'words',
 
@@ -104,4 +107,5 @@
                 console.log('GameController', $scope);
             }]);
 
-})(angular);
+})
+(angular);

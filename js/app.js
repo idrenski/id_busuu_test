@@ -26,6 +26,10 @@
                     templateUrl: 'views/partials/highscore.html',
                     controller: 'GameController'
                 })
+                .when('/api/name', {
+                    templateUrl: '/api',
+                    controller: 'AppController'
+                })
                 .otherwise({
                     redirectTo: '/home'
                 });
