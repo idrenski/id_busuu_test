@@ -56,12 +56,15 @@
                     $scope.idObj.Answers = {};
 
                     var i = 0;
+                    var qrandom = apiRandomFactory.getRandom(0, 2);
+
                     do {
                         var irandom = apiRandomFactory.getRandom(0, 10);
+
                         if ($scope.idObj.randoms.indexOf(irandom) < 0) {
 
                             $scope.idObj.randoms[i] = irandom;
-                            if ($scope.idObj.Question == undefined) {
+                            if ((i == qrandom)) {
                                 $scope.idObj.Question = {'def': words[irandom].def, 'en': words[irandom].en};
                             }
                             $scope.idObj.Answers[i] = {'es': words[irandom].es};
