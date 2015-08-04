@@ -24,7 +24,7 @@
                     }, function (response) {
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
-                        alert("AJAX failed!");
+                        alert("API failed!");
                     }
                 );
             }
@@ -60,11 +60,10 @@
 
                     do {
                         var irandom = apiRandomFactory.getRandom(0, 10);
-
                         if ($scope.idObj.randoms.indexOf(irandom) < 0) {
 
                             $scope.idObj.randoms[i] = irandom;
-                            if ((i == qrandom)) {
+                            if (i == qrandom) {
                                 $scope.idObj.Question = {'def': words[irandom].def, 'en': words[irandom].en};
                             }
                             $scope.idObj.Answers[i] = {'es': words[irandom].es};
