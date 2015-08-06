@@ -27,7 +27,7 @@
                     controller: 'HighscoreController'
                 })
                 .when('/api', {
-                    templateUrl: '/api.js',
+                    templateUrl: 'js/api.js',
                     controller: 'AppController'
                 })
                 .otherwise({

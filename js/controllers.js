@@ -14,7 +14,7 @@
 
             $scope.generateResult = function () {
 
-                $http.get('/api.js').
+                $http.get('js/api.js').
                     then(
                     function (response) {
                         // this callback will be called asynchronously
