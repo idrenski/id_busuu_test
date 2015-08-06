@@ -11,14 +11,26 @@
 
         function ($scope, $http, apiUserDataService) {
 
-            $scope.downloadResult = function () {
+
+            $scope.generateResult = function () {
 
                 $http.get('/api.js').
                     then(
                     function (response) {
                         // this callback will be called asynchronously
                         // when the response is available
-                        $scope.result = 'Player: ' + apiUserDataService.getUsername() + " with score: " + apiUserDataService.getScore();
+                        $scope.result =
+
+                            '{result: {' +
+                            'name: "' + apiUserDataService.getUsername() + '", ' +
+                            'score: "' + apiUserDataService.getScore() + '"' +
+                            '}}'
+
+
+                        /* Download file only */
+                        var blob = new Blob([$scope.result], {type: 'text/plain'});
+                        $scope.url = (window.URL || window.webkitURL).createObjectURL(blob);
+
                         console.log('AppController', $scope);
 
                     }, function (response) {
@@ -28,6 +40,7 @@
                     }
                 );
             }
+
         })
 
         .controller('HomeController', ['$scope', 'apiUserDataService',
@@ -37,7 +50,7 @@
 
                 $scope.name = apiUserDataService.getUsername();
 
-                console.log('HomeController');
+                console.log('HomeController', $scope);
             }])
 
         .controller('GameController', ['$scope', '$location', 'apiRandomFactory', 'apiUserDataService', 'apiAnswerFactory', 'words',
@@ -98,15 +111,26 @@
 
                 };
 
-                $scope.setPlayerName = function (pName) {
-                    apiUserDataService.setUsername(pName);
-                };
-
                 $scope.idObj = {};
                 $scope.idObj.Round = 1;
                 $scope.init();
 
                 console.log('GameController', $scope);
+            }])
+
+        .controller('HighscoreController', ['$scope', 'apiUserDataService',
+
+            function ($scope, apiUserDataService) {
+                // write Ctrl here
+
+                $scope.setPlayerName = function (pName) {
+                    apiUserDataService.setUsername(pName);
+                };
+
+                $scope.name = apiUserDataService.getUsername();
+                $scope.score = apiUserDataService.getScore();
+
+                console.log('HighscoreController', $scope);
             }]);
 
 })

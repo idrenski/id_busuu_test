@@ -7,6 +7,11 @@
 
     angular.module('myApp.services', [])
 
+        .config(['$compileProvider',
+            function ($compileProvider) {
+                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
+            }])
+
         .factory('apiRandomFactory', [ function () {
             var sResult = {};
 

@@ -24,10 +24,10 @@
                 })
                 .when('/highscore', {
                     templateUrl: 'views/partials/highscore.html',
-                    controller: 'GameController'
+                    controller: 'HighscoreController'
                 })
-                .when('/api/name', {
-                    templateUrl: '/api',
+                .when('/api', {
+                    templateUrl: '/api.js',
                     controller: 'AppController'
                 })
                 .otherwise({

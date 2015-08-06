@@ -13,12 +13,15 @@
     </h3>
 
     <button class="btn btn-default" type="submit"
-            ng-click="downloadResult()">
-        Download result
+            ng-click="generateResult()">
+        Generate result
     </button>
-    <div class="text-warning">
+
+    <div class="text-warning ng-isolate-scope">
         {{result}}
     </div>
+
+    <a download="BusuuResult.txt" ng-href="{{ url }}">Download result</a>
 
     <p class="text-left">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ullamcorper nisl non tellus fringilla, non
