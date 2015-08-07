@@ -18,17 +18,15 @@
                     function (response) {
                         // this callback will be called asynchronously
                         // when the response is available
-                        this.result =
-
-                            '{result: {' +
+                        $scope.name = '{result: {' +
                             'name: "' + apiUserDataService.getUsername() + '", ' +
                             'score: "' + apiUserDataService.getScore() + '"' +
                             '}}'
 
 
                         /* Download file only */
-                        var blob = new Blob([this.result], {type: 'text/plain'});
-                        this.url = (window.URL || window.webkitURL).createObjectURL(blob);
+                        var blob = new Blob([$scope.name], {type: 'text/plain'});
+                        $scope.url = (window.URL || window.webkitURL).createObjectURL(blob);
 
                         console.log('AppController', $scope);
 
@@ -38,98 +36,102 @@
                         alert("API failed!");
                     }
                 );
-            }
+            };
 
         })
 
-        .controller('HomeController', ['$scope', 'apiUserDataService',
+        .controller('HomeController',
 
-            function ($scope, apiUserDataService) {
-                // write Ctrl here
+        function ($scope, apiUserDataService) {
+            // write Ctrl here
 
-                this.name = apiUserDataService.getUsername();
+            this.name = apiUserDataService.getUsername();
 
-                console.log('HomeController', $scope);
-            }])
+            console.log('HomeController', $scope);
+        })
 
-        .controller('GameController', ['$scope', '$location', 'apiRandomFactory', 'apiUserDataService', 'apiAnswerFactory', 'words',
+        .controller('GameController',
 
-            function ($scope, $location, apiRandomFactory, apiUserDataService, apiAnswerFactory, words) {
-                // write Ctrl here
-                this.name = apiUserDataService.getUsername();
-                this.score = apiUserDataService.getScore();
+        function ($scope, $location, apiRandomFactory, apiUserDataService, apiAnswerFactory, words) {
+            // write Ctrl here
+            this.name = apiUserDataService.getUsername();
+            this.score = apiUserDataService.getScore();
 
 
-                this.init = function () {
+            this.init = function () {
 
-                    this.idObj.idAnswer = -1;
-                    this.idObj.randoms = [];
-                    this.idObj.Question = null;
-                    this.idObj.Answers = {};
+                this.idObj.idAnswer = -1;
+                this.idObj.randoms = [];
+                this.idObj.Question = null;
+                this.idObj.Answers = {};
 
-                    var i = 0;
-                    var qrandom = apiRandomFactory.getRandom(0, 2);
+                var i = 0;
+                var qrandom = apiRandomFactory.getRandom(0, 2);
 
-                    do {
-                        var irandom = apiRandomFactory.getRandom(0, 10);
-                        if (this.idObj.randoms.indexOf(irandom) < 0) {
+                do {
+                    var irandom = apiRandomFactory.getRandom(0, 10);
+                    if (this.idObj.randoms.indexOf(irandom) < 0) {
 
-                            this.idObj.randoms[i] = irandom;
-                            if (i == qrandom) {
-                                this.idObj.Question = {'def': words[irandom].def, 'en': words[irandom].en};
-                            }
-                            this.idObj.Answers[i] = {'es': words[irandom].es};
-
-                            i++;
+                        this.idObj.randoms[i] = irandom;
+                        if (i == qrandom) {
+                            this.idObj.Question = {'def': words[irandom].def, 'en': words[irandom].en};
                         }
+                        this.idObj.Answers[i] = {'es': words[irandom].es};
+
+                        i++;
                     }
-                    while (i < 3);
-                };
+                }
+                while (i < 3);
+            };
 
-                this.checkAnswer = function (Question, idAnswer) {
-                    var idQuestion = apiAnswerFactory.getIdQuestion(Question);
+            this.checkAnswer = function (Question, idAnswer) {
+                var idQuestion = apiAnswerFactory.getIdQuestion(Question);
 
-                    if (idAnswer == idQuestion) {
-                        apiUserDataService.setScore(1);
-                        this.idObj.Round++;
+                if (idAnswer == idQuestion) {
+                    apiUserDataService.setScore(1);
+                    this.idObj.Round++;
 
-                        if (this.idObj.Round > 3) {
-                            $location.path('/highscore');
-                            return true;
-                        }
-
-                        this.init();
-                        $location.path('/game');
-                        return true;
-
-                    }
-                    else {
+                    if (this.idObj.Round > 3) {
                         $location.path('/highscore');
-                        return false;
+                        return true;
                     }
 
-                };
+                    this.init();
+                    $location.path('/game');
+                    return true;
 
-                this.idObj = {};
-                this.idObj.Round = 1;
-                this.init();
+                }
+                else {
+                    $location.path('/highscore');
+                    return false;
+                }
 
-                console.log('GameController', $scope);
-            }])
+            };
 
-        .controller('HighscoreController', ['$scope', 'apiUserDataService',
+            this.idObj = {};
+            this.idObj.Round = 1;
+            this.init();
 
-            function ($scope, apiUserDataService) {
-                // write Ctrl here
-                this.setPlayerName = function (pName) {
-                    apiUserDataService.setUsername(pName);
-                };
+            console.log('GameController', $scope);
+        })
 
-                this.name = apiUserDataService.getUsername();
-                this.score = apiUserDataService.getScore();
+        .controller('HighscoreController',
 
-                console.log('HighscoreController', $scope);
-            }]);
+        function ($scope, $location, apiUserDataService) {
+            // write Ctrl here
+            this.redirectMe = function () {
+                $location.path('/api');
+            };
+
+            this.setPlayerName = function (pName) {
+                apiUserDataService.setUsername(pName);
+            };
+
+            this.name = apiUserDataService.getUsername();
+            this.score = apiUserDataService.getScore();
+
+            console.log('HighscoreController', $scope);
+        });
 
 })
 (angular);

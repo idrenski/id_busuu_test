@@ -6,24 +6,16 @@
 
     <h3>Your score is {{high.score}}<br>
 
-        Your can enter name here: <input name="name"
+        You can enter your name here: <input name="name"
                                          ng-model="high.name"
                                          ng-change="high.setPlayerName(high.name)"
                                          placeholder="Enter your name here">
     </h3>
 
-<!--
     <button class="btn btn-default" type="submit"
-            ng-click="app.generateResult()">
-        Generate result
+            ng-click="high.redirectMe()">
+        Next
     </button>
-
-    <div class="text-warning">
-        {{app.result}}
-    </div>
-
-    <a download="BusuuResult.txt" ng-href="{{ app.url }}">Download result</a>
--->
 
     <p class="text-left">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ullamcorper nisl non tellus fringilla, non

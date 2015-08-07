@@ -30,7 +30,7 @@
                     controllerAs: 'high'
                 })
                 .when('/api', {
-                    templateUrl: 'js/api.js',
+                    templateUrl: 'views/partials/partial3.html',
                     controller: 'AppController',
                     controllerAs: 'app'
                 })
