@@ -4,6 +4,6 @@
 
 exports.name = function (req, res) {
     res.json({
-        result: 'Bob'
+        name: 'Bob'
     });
 };

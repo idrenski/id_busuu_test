@@ -16,19 +16,23 @@
             $routeProvider
                 .when('/home', {
                     templateUrl: 'views/partials/home.html',
-                    controller: 'HomeController'
+                    controller: 'HomeController',
+                    controllerAs: 'home'
                 })
                 .when('/game', {
                     templateUrl: 'views/partials/game.html',
-                    controller: 'GameController'
+                    controller: 'GameController',
+                    controllerAs: 'game'
                 })
                 .when('/highscore', {
                     templateUrl: 'views/partials/highscore.html',
-                    controller: 'HighscoreController'
+                    controller: 'HighscoreController',
+                    controllerAs: 'high'
                 })
                 .when('/api', {
                     templateUrl: 'js/api.js',
-                    controller: 'AppController'
+                    controller: 'AppController',
+                    controllerAs: 'app'
                 })
                 .otherwise({
                     redirectTo: '/home'

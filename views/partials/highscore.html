@@ -1,27 +1,29 @@
 <div class="starter-template">
-    <h1>Hello {{name}}</h1>
+    <h1>Hello {{high.name}}</h1>
 
     <h3>Busuu front end test app
         <br>High Score page</h3>
 
-    <h3>Your score is {{score}}<br>
+    <h3>Your score is {{high.score}}<br>
 
         Your can enter name here: <input name="name"
-                                         ng-model="name"
-                                         ng-change="setPlayerName(name)"
+                                         ng-model="high.name"
+                                         ng-change="high.setPlayerName(high.name)"
                                          placeholder="Enter your name here">
     </h3>
 
+<!--
     <button class="btn btn-default" type="submit"
-            ng-click="generateResult()">
+            ng-click="app.generateResult()">
         Generate result
     </button>
 
     <div class="text-warning">
-        {{result}}
+        {{app.result}}
     </div>
 
-    <a download="BusuuResult.txt" ng-href="{{ url }}">Download result</a>
+    <a download="BusuuResult.txt" ng-href="{{ app.url }}">Download result</a>
+-->
 
     <p class="text-left">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ullamcorper nisl non tellus fringilla, non

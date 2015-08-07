@@ -11,15 +11,14 @@
 
         function ($scope, $http, apiUserDataService) {
 
-
-            $scope.generateResult = function () {
+            this.generateResult = function () {
 
                 $http.get('js/api.js').
                     then(
                     function (response) {
                         // this callback will be called asynchronously
                         // when the response is available
-                        $scope.result =
+                        this.result =
 
                             '{result: {' +
                             'name: "' + apiUserDataService.getUsername() + '", ' +
@@ -28,8 +27,8 @@
 
 
                         /* Download file only */
-                        var blob = new Blob([$scope.result], {type: 'text/plain'});
-                        $scope.url = (window.URL || window.webkitURL).createObjectURL(blob);
+                        var blob = new Blob([this.result], {type: 'text/plain'});
+                        this.url = (window.URL || window.webkitURL).createObjectURL(blob);
 
                         console.log('AppController', $scope);
 
@@ -48,7 +47,7 @@
             function ($scope, apiUserDataService) {
                 // write Ctrl here
 
-                $scope.name = apiUserDataService.getUsername();
+                this.name = apiUserDataService.getUsername();
 
                 console.log('HomeController', $scope);
             }])
@@ -57,29 +56,29 @@
 
             function ($scope, $location, apiRandomFactory, apiUserDataService, apiAnswerFactory, words) {
                 // write Ctrl here
-                $scope.name = apiUserDataService.getUsername();
-                $scope.score = apiUserDataService.getScore();
+                this.name = apiUserDataService.getUsername();
+                this.score = apiUserDataService.getScore();
 
 
-                $scope.init = function () {
+                this.init = function () {
 
-                    $scope.idObj.idAnswer = -1;
-                    $scope.idObj.randoms = [];
-                    $scope.idObj.Question = null;
-                    $scope.idObj.Answers = {};
+                    this.idObj.idAnswer = -1;
+                    this.idObj.randoms = [];
+                    this.idObj.Question = null;
+                    this.idObj.Answers = {};
 
                     var i = 0;
                     var qrandom = apiRandomFactory.getRandom(0, 2);
 
                     do {
                         var irandom = apiRandomFactory.getRandom(0, 10);
-                        if ($scope.idObj.randoms.indexOf(irandom) < 0) {
+                        if (this.idObj.randoms.indexOf(irandom) < 0) {
 
-                            $scope.idObj.randoms[i] = irandom;
+                            this.idObj.randoms[i] = irandom;
                             if (i == qrandom) {
-                                $scope.idObj.Question = {'def': words[irandom].def, 'en': words[irandom].en};
+                                this.idObj.Question = {'def': words[irandom].def, 'en': words[irandom].en};
                             }
-                            $scope.idObj.Answers[i] = {'es': words[irandom].es};
+                            this.idObj.Answers[i] = {'es': words[irandom].es};
 
                             i++;
                         }
@@ -87,19 +86,19 @@
                     while (i < 3);
                 };
 
-                $scope.checkAnswer = function (Question, idAnswer) {
+                this.checkAnswer = function (Question, idAnswer) {
                     var idQuestion = apiAnswerFactory.getIdQuestion(Question);
 
                     if (idAnswer == idQuestion) {
                         apiUserDataService.setScore(1);
-                        $scope.idObj.Round++;
+                        this.idObj.Round++;
 
-                        if ($scope.idObj.Round > 3) {
+                        if (this.idObj.Round > 3) {
                             $location.path('/highscore');
                             return true;
                         }
 
-                        $scope.init();
+                        this.init();
                         $location.path('/game');
                         return true;
 
@@ -111,9 +110,9 @@
 
                 };
 
-                $scope.idObj = {};
-                $scope.idObj.Round = 1;
-                $scope.init();
+                this.idObj = {};
+                this.idObj.Round = 1;
+                this.init();
 
                 console.log('GameController', $scope);
             }])
@@ -122,13 +121,12 @@
 
             function ($scope, apiUserDataService) {
                 // write Ctrl here
-
-                $scope.setPlayerName = function (pName) {
+                this.setPlayerName = function (pName) {
                     apiUserDataService.setUsername(pName);
                 };
 
-                $scope.name = apiUserDataService.getUsername();
-                $scope.score = apiUserDataService.getScore();
+                this.name = apiUserDataService.getUsername();
+                this.score = apiUserDataService.getScore();
 
                 console.log('HighscoreController', $scope);
             }]);
