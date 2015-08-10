@@ -38,6 +38,12 @@
                 );
             };
 
+
+            this.divVisible = false;
+            this.generateResult();
+            this.divVisible = true;
+
+            console.log('AppController', $scope);
         })
 
         .controller('HomeController',

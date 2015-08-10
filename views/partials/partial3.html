@@ -1,9 +1,9 @@
-<button class="btn btn-default" type="submit"
-        ng-click="app.generateResult()">
-    Generate result
-</button>
+<div class="starter-template">
 
-<p>This is context of the result: {{name}}
-</p>
+    <div ng-show="app.divVisible">This is context of the result: <p>{{name}}</p>
+    </div>
 
-Donwload result at <a download="BusuuResult.txt" ng-href="{{ url }}">here</a>
+    <div ng-show="app.divVisible">Download result at <a download="BusuuResult.txt" ng-href="{{ url }}">here</a>
+    </div>
+
+</div>
