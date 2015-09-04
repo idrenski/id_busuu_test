@@ -9,6 +9,8 @@
         'myApp.controllers',
         'myApp.filters',
         'myApp.services',
+        'myApp.factories',
+        'myApp.values',
         'myApp.directives',
         'ngRoute'
     ])
