@@ -18,6 +18,7 @@
         .factory('apiRandomFactory', apiRandomFactory)
         .factory('apiAnswerFactory', apiAnswerFactory)
 
+
     apiRandomFactory.$inject = [];
     apiAnswerFactory.$inject = ['words'];
 

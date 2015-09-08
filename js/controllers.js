@@ -147,5 +147,35 @@
         console.log('HighscoreController', $scope);
     }
 
+
+    function DownloadResult($scope, $http, apiUserDataService) {
+
+        $http.get('js/api.js')
+            .then(
+            function (response) {
+                // this callback will be called asynchronously
+                // when the response is available
+                $scope.name = '{result: {' +
+                    'name: "' + apiUserDataService.getUsername() + '", ' +
+                    'score: "' + apiUserDataService.getScore() + '"' +
+                    '}}';
+
+
+                /* Download file only */
+                var blob = new Blob([$scope.name], {type: 'text/plain'});
+                $scope.url = (window.URL || window.webkitURL).createObjectURL(blob);
+
+                console.log('AppController', sResult);
+
+            }, function (response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                console.error("API failed!", response)
+            }
+        );
+
+        return $scope.url;
+    };
+
 })
 (angular);

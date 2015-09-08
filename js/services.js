@@ -10,23 +10,25 @@
         .service('apiUserDataService', apiUserDataService)
 
     function apiUserDataService() {
-        this.name = "Player 1";
-        this.score = 0;
+        var vm = this;
 
-        this.getUsername = function () {
-            return this.name;
+        vm.name = "Player 1";
+        vm.score = 0;
+
+        vm.getUsername = function () {
+            return vm.name;
         };
 
-        this.setUsername = function (newName) {
-            this.name = newName;
+        vm.setUsername = function (newName) {
+            vm.name = newName;
         };
 
-        this.getScore = function () {
-            return this.score;
+        vm.getScore = function () {
+            return vm.score;
         };
 
-        this.setScore = function (newScore) {
-            this.score = this.score + newScore;
+        vm.setScore = function (newScore) {
+            vm.score = vm.score + newScore;
         };
 
     }
