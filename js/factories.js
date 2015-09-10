@@ -17,10 +17,11 @@
 
         .factory('apiRandomFactory', apiRandomFactory)
         .factory('apiAnswerFactory', apiAnswerFactory)
-
+        .factory('apiDataFactory', apiDataFactory);
 
     apiRandomFactory.$inject = [];
     apiAnswerFactory.$inject = ['words'];
+    apiDataFactory.$inject = ['apiUserDataService'];
 
     function apiRandomFactory() {
         var sResult = {};
@@ -47,6 +48,42 @@
                 }
             }
             return -1;
+        };
+
+        return sResult;
+    }
+
+
+    function apiDataFactory(apiUserDataService) {
+        var sResult = {};
+
+        function SetData() {
+            var name;
+            name = '{result: {' +
+                'name: "' + apiUserDataService.getUsername() + '", ' +
+                'score: "' + apiUserDataService.getScore() + '"' +
+                '}}';
+
+            return name;
+        }
+
+        sResult.getURL = function () {
+            var name;
+            var url;
+
+            name = SetData();
+
+            /* Download file only */
+            var blob = new Blob([name], {type: 'text/plain'});
+            url = (window.URL || window.webkitURL).createObjectURL(blob);
+
+            return url;
+
+        };
+
+        sResult.getData = function () {
+            return SetData();
+
         };
 
         return sResult;

@@ -7,7 +7,7 @@
 
     angular.module('myApp.services', [])
 
-        .service('apiUserDataService', apiUserDataService)
+        .service('apiUserDataService', apiUserDataService);
 
     function apiUserDataService() {
         var vm = this;
